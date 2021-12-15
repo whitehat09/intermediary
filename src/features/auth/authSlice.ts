@@ -33,24 +33,14 @@ export const authSlice = createSlice({
     signoutAdmin: (state) => {// 
       state.isLoginAdmin=false;
     },
-    signIn: (state) => {// 
-      // if(state.admin.email === action.payload.email &&state.admin.password === action.payload.password){
-      //   state.isLoginAdmin=true;
-      //   alert('đây là tài khoản admin')
-      // }
-      // else{
-      //   alert('đây  không là tài khoản admin')
-      // }
-      
+    signIn: (state) => {
       return state;
     },
     signInFormSaga: (state, action) => {
-      state.currentUsers = action.payload.user;
-      state.isLoginUser = true;
-      console.log(`đây  không là tài khoản user ${action.payload}`)
-      
-      // localStorage.setItem(`username`, action.payload.user.username);
-      // localStorage.setItem(`token`, action.payload.user.token);
+     
+      console.log('signInFormSaga',action.payload)
+      localStorage.setItem(`username`, action.payload.user.username);
+      localStorage.setItem(`token`, action.payload.user.token);
     },
     
     

@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com/posts/",
+  baseURL: "https://61b7085ac95dd70017d411a2.mockapi.io/truck/api/",
   headers: {
     "Content-Type": "application/json",
   },
