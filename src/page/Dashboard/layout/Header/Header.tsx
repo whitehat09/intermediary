@@ -14,10 +14,13 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../Footer/Footer";
+import { useAppDispatch } from "../../../../app/hooks";
+import { signoutAdmin } from "../../../../features/auth/authSlice";
 const pages = ["Xe", "Hàng hoá", "Người dùng"];
-const settings = ["Hồ sơ", "Tài khoản", "Đăng xuất"];
+const settings = ["Đăng xuất"];
 export const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -36,14 +39,16 @@ export const Header = () => {
     setAnchorElNav(null);
   };
 
-  const abc = (name: any) => {
-    console.log(typeof name);
+  const linkPage = (name: any) => {
     if (name === "Xe") {
       navigate("/dashboard/truck");
     } else if (name === "Hàng hoá") {
       navigate("/dashboard/goods");
     } else if (name === "Người dùng") {
       navigate("/dashboard/user");
+    } else if (name === "Đăng xuất") {
+      dispatch({ type: signoutAdmin.type });
+      navigate("/");
     }
   };
   const handleCloseUserMenu = () => {
@@ -112,7 +117,7 @@ export const Header = () => {
                 <Button
                   key={page}
                   // onClick={handleCloseNavMenu}
-                  onClick={() => abc(page)}
+                  onClick={() => linkPage(page)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   {/* <Link to={page}>{page}</Link> */}
@@ -145,7 +150,12 @@ export const Header = () => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography
+                      onClick={() => linkPage(setting)}
+                      textAlign="center"
+                    >
+                      {setting}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>

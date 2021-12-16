@@ -63,7 +63,7 @@ export const Users = () => {
       type: getUser.type,
     });
   }, [dispatch, user]);
-  console.log(user);
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -121,7 +121,7 @@ export const Users = () => {
               {currentDataTable
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any) => (
-                  <TableRow key={row.productName}>
+                  <TableRow key={row.id}>
                     <TableCell>
                       <Grid container>
                         <Grid item lg={10}>

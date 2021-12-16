@@ -6,6 +6,7 @@ const authApi = {
       user: data,
     });
   },
+ 
 };
 
 export default authApi;

@@ -91,6 +91,7 @@ export const Goods = () => {
   const btnAddStyle = {
     marginTop: "20px",
   };
+  console.log("cargoType.length", cargoType.length);
   return (
     <>
       <Grid container style={btnAddStyle} justify="center">
@@ -119,7 +120,7 @@ export const Goods = () => {
               {currentDataTable
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any) => (
-                  <TableRow key={row.productName}>
+                  <TableRow key={row.id}>
                     <TableCell>
                       <Grid container>
                         <Grid item lg={10}>

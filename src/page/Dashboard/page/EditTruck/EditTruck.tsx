@@ -11,14 +11,26 @@ import {
 } from "@material-ui/core";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import { useNavigate } from "react-router-dom";
-
+import MenuItem from "@mui/material/MenuItem";
 import { Formik, Field, Form, FormikProps, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useAppDispatch } from "../../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import { addTruck, editTruck } from "../../../../features/truck/truckSlice";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { RootState } from "../../../../app/store";
+import { getCargoType } from "../../../../features/cargoType/cargoTypeSlice";
 export const EditTruck = () => {
+  const { cargoType } = useAppSelector(
+    (state: RootState) => state.cargoTypeReducer
+  );
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch({
+      type: getCargoType.type,
+    });
+  }, [dispatch, cargoType]);
+  const navigate = useNavigate();
   let { id }: any = useParams();
   const [data, setdata] = useState<any>({});
   useEffect(() => {
@@ -34,8 +46,6 @@ export const EditTruck = () => {
       });
   }, []);
 
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const paperStyle = {
     padding: 20,
     width: 300,
@@ -121,6 +131,20 @@ export const EditTruck = () => {
                   fullWidth
                   required
                 />
+                {/* <ErrorMessage
+                  name="cargoType"
+                  render={(message) => (
+                    <Box style={{ color: "red" }}>{message}</Box>
+                  )}
+                />
+                <Field
+                  as={TextField}
+                  label="Danh mục hàng hoá"
+                  placeholder="Nhập danh mục hành hoá"
+                  name="cargoType"
+                  fullWidth
+                  required
+                /> */}
                 <ErrorMessage
                   name="cargoType"
                   render={(message) => (
@@ -134,7 +158,19 @@ export const EditTruck = () => {
                   name="cargoType"
                   fullWidth
                   required
-                />
+                  select
+                  value={data.cargoType}
+                >
+                  <MenuItem value={data.cargoType}>
+                    {data.cargoType}----
+                  </MenuItem>
+
+                  {cargoType?.map((item: any) => (
+                    <MenuItem key={item.id} value={item.id}>
+                      {item.cargoType}
+                    </MenuItem>
+                  ))}
+                </Field>
                 <ErrorMessage
                   name="driver"
                   render={(message) => (

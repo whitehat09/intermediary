@@ -15,11 +15,15 @@ import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOut
 import { Formik, Field, Form, FormikProps, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+import { useAppDispatch } from "../../app/hooks";
+import { addUser } from "../../features/user/userSlice";
+
 interface Props {
   handleChange: any;
 }
 export const SignUp: FC<Props> = ({ handleChange }) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const paperStyle = {
     padding: 20,
     height: "70vh",
@@ -32,7 +36,7 @@ export const SignUp: FC<Props> = ({ handleChange }) => {
   let firstvalue = {
     email: "",
     password: "",
-    accountType: "user",
+    id: Date.now(),
     name: "",
   };
 
@@ -65,14 +69,16 @@ export const SignUp: FC<Props> = ({ handleChange }) => {
               initialValues={firstvalue}
               validationSchema={validate}
               onSubmit={(values) => {
+                dispatch({ type: addUser.type, payload: values });
                 alert(JSON.stringify(values, null, 2));
+                navigate("/");
               }}
             >
               {(
                 form: FormikProps<{
                   email: string;
                   password: string;
-                  accountType: string;
+                  id: any;
                   name: string;
                 }>
               ) => (

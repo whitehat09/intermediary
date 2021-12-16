@@ -1,4 +1,4 @@
-import React, { FunctionComponent as FC, useEffect } from "react";
+import React, { FunctionComponent as FC, useEffect, useState } from "react";
 import {
   Paper,
   Grid,
@@ -11,15 +11,34 @@ import {
 } from "@material-ui/core";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import { useNavigate } from "react-router-dom";
-
-import { Formik, Field, Form, FormikProps, ErrorMessage } from "formik";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import {
+  Formik,
+  Field,
+  Form,
+  FormikProps,
+  ErrorMessage,
+  FieldProps,
+} from "formik";
+import axios from "axios";
 import * as Yup from "yup";
-import { useAppDispatch } from "../../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import { addTruck } from "../../../../features/truck/truckSlice";
-
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { getCargoType } from "../../../../features/cargoType/cargoTypeSlice";
+import { RootState } from "../../../../app/store";
 export const AddTruck = () => {
-  const navigate = useNavigate();
+  const { cargoType } = useAppSelector(
+    (state: RootState) => state.cargoTypeReducer
+  );
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch({
+      type: getCargoType.type,
+    });
+  }, [dispatch, cargoType]);
+  const navigate = useNavigate();
 
   const paperStyle = {
     padding: 20,
@@ -69,6 +88,7 @@ export const AddTruck = () => {
     //   .max(25, "Phải có 25 ký tự trở xuống")
     //   .required("Bắt buộc !"),
   });
+  const option = { id: "1", name: "1" };
   return (
     <>
       <Grid style={paperStyle}>
@@ -133,7 +153,36 @@ export const AddTruck = () => {
                   name="cargoType"
                   fullWidth
                   required
-                />
+                  select
+                >
+                  {cargoType?.map((item: any) => (
+                    <MenuItem value={item.id}>{item.cargoType}</MenuItem>
+                  ))}
+                </Field>
+                {/* <Field
+                  as={TextField}
+                  label="Danh mục hàng hoá"
+                  placeholder="Nhập danh mục hành hoá"
+                  name="cargoType"
+                  fullWidth
+                  required
+                  select
+                /> */}
+
+                {/* 
+                <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  name="cargoType"
+                  value={age}
+                  label="Loại hàng hoá"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select> */}
                 <ErrorMessage
                   name="driver"
                   render={(message) => (
