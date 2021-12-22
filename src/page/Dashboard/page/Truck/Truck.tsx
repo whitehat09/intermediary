@@ -19,6 +19,8 @@ import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import { RootState } from "../../../../app/store";
 import { deleteTruck, getTruck } from "../../../../features/truck/truckSlice";
 import { useNavigate } from "react-router-dom";
+import Chart from "../../../../components/Chart/Chart";
+import PieChart from "../../../../components/PieChart/PieChart";
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
@@ -242,6 +244,8 @@ export const Truck = () => {
             </TableFooter>
           </Table>
         </TableContainer>
+        <Chart />
+        <PieChart />
       </Grid>
     </>
   );

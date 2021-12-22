@@ -17,22 +17,32 @@ import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { signIn, signInAdmin } from "../../features/auth/authSlice";
-
+import { getUser } from "../../features/user/userSlice";
 interface Props {
   handleChange: any;
 }
 export const Login: FC<Props> = ({ handleChange }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isLoginAdmin } = useAppSelector((state: RootState) => {
+  const { user } = useAppSelector((state: RootState) => state.userReducer);
+
+  useEffect(() => {
+    dispatch({
+      type: getUser.type,
+    });
+  }, [dispatch, user]);
+
+  const { isLoginAdmin, isLoginUser } = useAppSelector((state: RootState) => {
     return state.authReducer;
   });
 
   useEffect(() => {
     if (isLoginAdmin) {
       navigate("/dashboard");
+    } else if (isLoginUser) {
+      navigate("/home");
     }
-  }, [isLoginAdmin, navigate, dispatch]);
+  }, [isLoginAdmin, navigate, dispatch, isLoginUser]);
   const paperStyle = {
     padding: 20,
     width: 300,
@@ -77,6 +87,16 @@ export const Login: FC<Props> = ({ handleChange }) => {
                   dispatch({ type: signInAdmin.type, payload: values });
                 } else {
                   alert("đây  không là tài khoản admin");
+                  user.filter((item: any) => {
+                    if (
+                      item.email === values.email &&
+                      item.password === values.password
+                    ) {
+                      dispatch({ type: signIn.type, payload: values });
+
+                      localStorage.setItem("currentUsers", values.email);
+                    }
+                  });
                 }
                 alert(JSON.stringify(values, null, 2));
                 // dispatch({ type: signIn.type, payload: values });
