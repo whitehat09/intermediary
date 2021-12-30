@@ -1,0 +1,32 @@
+#get user
+# @name getUser
+GET http://localhost:3000/api/user
+####
+# add user
+# @name addUser
+POST  http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "name": "name 14",
+    "email": "user",
+    "password": "123123"
+}
+####
+# edit user
+# @name editUser
+PUT   http://localhost:3000/api/user/2
+Content-Type: application/json
+
+{
+    "name": "name 8",
+    "email": "user",
+    "password": "123123"
+}
+####
+# delete user
+# @name deleteUser
+DELETE    http://localhost:3000/api/truck/13
+Content-Type: application/json
+####
+

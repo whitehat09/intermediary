@@ -1,0 +1,78 @@
+{
+  "user": [
+    {
+      "name": "Nguyễn Văn A",
+      "email": "user1",
+      "password": "123123",
+      "id": 1640673452168,
+      "createdAt": 1640673463770,
+      "updateAt": 1640673463771
+    },
+    {
+      "name": "Nguyễn Văn B",
+      "email": "user2",
+      "password": "123123",
+      "createdAt": 1640680088363,
+      "updateAt": 1640680088363,
+      "id": 1640673452171
+    }
+  ],
+  "truck": [
+    {
+      "id": "13",
+      "truckPlate": "123456",
+      "cargoType": "2",
+      "driver": "driver 5",
+      "truckType": "truckType 5",
+      "price": "100000",
+      "dimenSion ": "1",
+      "parkingAddress ": "q",
+      "productionYear": "4444",
+      "Status": "Status 14",
+      "description": "h",
+      "dimenSion": "1000",
+      "parkingAddress": "222"
+    },
+    {
+      "truckPlate": "truckPlate 17",
+      "cargoType": "2",
+      "driver": "driver 14",
+      "truckType": "truckType 14",
+      "price": 97,
+      "dimenSion": "dimenSion 14",
+      "parkingAddress": "parkingAddress 14",
+      "productionYear": 75,
+      "Status": "Status 14",
+      "description": "description 14",
+      "id": "14",
+      "dimenSion ": "1",
+      "parkingAddress ": "6"
+    }
+  ],
+  "cargoType": [
+    {
+      "cargoType": "Nội Thất6",
+      "id": "3"
+    },
+    {
+      "cargoType": "Quần Áo",
+      "id": "4"
+    },
+    {
+      "cargoType": "Giày",
+      "id": "5"
+    },
+    {
+      "cargoType": "Máy Tính",
+      "createdAt": 1640850804954,
+      "updateAt": 1640850804954,
+      "id": "thKGC0f"
+    },
+    {
+      "cargoType": "Đồ Ăn1",
+      "createdAt": 1640850833581,
+      "updateAt": 1640850833581,
+      "id": "Ykkq_ZQ"
+    }
+  ]
+}
