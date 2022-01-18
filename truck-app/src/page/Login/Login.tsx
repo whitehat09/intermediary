@@ -1,48 +1,31 @@
-import { FunctionComponent as FC, useEffect } from "react";
 import {
-  Paper,
-  Grid,
   Avatar,
-  TextField,
-  Button,
-  Typography,
-  Link,
   Box,
+  Button,
+  Grid,
+  Link,
+  Paper,
+  TextField,
+  Typography,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
+import { FunctionComponent as FC } from "react";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { Formik, Field, Form, FormikProps, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
-import { signIn, signInAdmin } from "../../features/auth/authSlice";
-import { getUser } from "../../features/user/userSlice";
+import usersApi from "../../api/usersApi";
 import { TextFieldComponent } from "../../components/TextFieldComponent/TextFieldComponent";
+
 interface Props {
   handleChange: any;
 }
 export const Login: FC<Props> = ({ handleChange }) => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state: RootState) => state.userReducer);
 
-  useEffect(() => {
-    dispatch({
-      type: getUser.type,
-    });
-  }, [dispatch]);
-
-  const { isLoginAdmin, isLoginUser } = useAppSelector((state: RootState) => {
-    return state.authReducer;
+  const { data: users } = useQuery("getUser", usersApi.read, {
+    refetchOnWindowFocus: true,
   });
-
-  useEffect(() => {
-    if (isLoginAdmin) {
-      navigate("/dashboard");
-    } else if (isLoginUser) {
-      navigate("/home");
-    }
-  }, [isLoginAdmin, navigate, dispatch, isLoginUser]);
   const paperStyle = {
     padding: 20,
     width: 300,
@@ -67,12 +50,12 @@ export const Login: FC<Props> = ({ handleChange }) => {
     <>
       <Grid>
         <Paper style={paperStyle}>
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Avatar style={avatarStyle}>
               <LockOutlinedIcon />
             </Avatar>
           </Grid>
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <h2>Đăng nhập</h2>
             <Formik
               enableReinitialize
@@ -81,17 +64,17 @@ export const Login: FC<Props> = ({ handleChange }) => {
               onSubmit={(values) => {
                 if (values.email === "admin" && values.password === "123123") {
                   alert("đây là tài khoản admin");
-                  dispatch({ type: signInAdmin.type, payload: values });
+                  navigate("/dashboard");
+                  localStorage.setItem("isAdmin", "admin");
                 } else {
                   alert("đây  không là tài khoản admin");
-                  user.filter((item: any) => {
+                  users.filter((item: any) => {
                     if (
                       item.email === values.email &&
                       item.password === values.password
                     ) {
-                      dispatch({ type: signIn.type, payload: values });
-
-                      localStorage.setItem("currentUsers", values.email);
+                      localStorage.setItem("isUser", values.email);
+                      navigate("/home");
                     }
                   });
                 }

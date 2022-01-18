@@ -1,27 +1,23 @@
-import { Link, Outlet } from "react-router-dom";
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
+import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
+import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useAppDispatch } from "../../../app/hooks";
-import { signout } from "../../../features/auth/authSlice";
-
-const pages = ["Xe", "Ví dụ", "Tài khoản của tôi"];
+const pages = ["Xe",  "Tài khoản của tôi"];
 const settings = ["Đăng xuất"];
 export const Header = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -43,12 +39,10 @@ export const Header = () => {
   const linkPage = (name: any) => {
     if (name === "Xe") {
       navigate("/home/truck");
-    } else if (name === "Ví dụ") {
-      navigate("/home/ex");
     } else if (name === "Tài khoản của tôi") {
       navigate("/home/myaccount");
     } else if (name === "Đăng xuất") {
-      dispatch({ type: signout.type });
+      localStorage.clear();
       navigate("/");
     }
   };

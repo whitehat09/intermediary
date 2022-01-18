@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 import { Grid } from "@material-ui/core";
 import { Header } from "../../components/AuthenticatedLayout/Header/Header";
@@ -10,13 +10,17 @@ export const Dashboard = () => {
   };
   return (
     <>
-      <Grid style={pageAdminStyle}>
-        <Header />
-        <Grid style={mainPageStyle}>
-          <Outlet />
+      {localStorage.getItem("isAdmin") ? (
+        <Grid style={pageAdminStyle}>
+          <Header />
+          <Grid style={mainPageStyle}>
+            <Outlet />
+          </Grid>
+          <Footer />
         </Grid>
-        <Footer />
-      </Grid>
+      ) : (
+        <Navigate to="/" />
+      )}
     </>
   );
 };

@@ -18,7 +18,6 @@ const ScrollToTop = () => {
   if (!visible) {
     return <></>;
   }
-
   return (
     <div
       className="scroll-to-top cursor-pointer text-center"

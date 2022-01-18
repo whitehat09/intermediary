@@ -1,20 +1,13 @@
-import { makeStyles } from "@material-ui/core/styles";
 import {
-  Table,
+  Grid, Paper, Table,
   TableBody,
   TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Grid,
-  Typography,
-  TablePagination,
-  TableFooter,
+  TableContainer, TableFooter, TableHead, TablePagination, TableRow, Typography
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { useState } from "react";
+import { useQuery } from "react-query";
 
-import { useState} from "react";
-import {  useQuery } from "react-query";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -68,17 +61,14 @@ export const TruckUser = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
   const classes = useStyles();
-  const btnAddStyle = {
-    marginTop: "20px",
-  };
+
   return (
     <>
       {status === "loading" && <div>Đang tải dữu liệu </div>}
       {status === "error" && <div>lỗi khi tìm nạp dữ liệu </div>}
       {status === "success" && (
-        <Grid container justify="center">
+        <Grid container justifyContent="center">
           <TableContainer component={Paper} className={classes.tableContainer}>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>

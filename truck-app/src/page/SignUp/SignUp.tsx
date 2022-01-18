@@ -1,29 +1,24 @@
-import React, { FunctionComponent as FC } from "react";
 import {
-  Paper,
-  Grid,
-  Avatar,
-  TextField,
-  Button,
-  Typography,
-  Link,
-  Box,
+  Avatar, Box, Button, Grid, Link, Paper, TextField, Typography
 } from "@material-ui/core";
-
-import { useNavigate } from "react-router";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
-import { Formik, Field, Form, FormikProps, ErrorMessage } from "formik";
+import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
+import  { FunctionComponent as FC } from "react";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router";
 import * as Yup from "yup";
+import usersApi from "../../api/usersApi";
 
-import { useAppDispatch } from "../../app/hooks";
-import { addUser } from "../../features/user/userSlice";
 
 interface Props {
   handleChange: any;
 }
 export const SignUp: FC<Props> = ({ handleChange }) => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const { mutate } = useMutation(usersApi.create);
+  const addUser = (value: any) => {
+    mutate(value);
+  };
   const paperStyle = {
     padding: 20,
     height: "70vh",
@@ -32,7 +27,7 @@ export const SignUp: FC<Props> = ({ handleChange }) => {
   };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const btnstyle = { margin: "20px 0" };
-  const textColorError = { color: "red" };
+
   let firstvalue = {
     email: "",
     password: "",
@@ -43,11 +38,9 @@ export const SignUp: FC<Props> = ({ handleChange }) => {
   const validate = Yup.object().shape({
     email: Yup.string()
       .max(25, "Phải có 25 ký tự trở xuống")
-      //   .email("Vui lòng nhập tài khoản và mật khẩu hợp lệ !")
       .required("Bắt buộc !"),
     name: Yup.string()
       .max(25, "Phải có 25 ký tự trở xuống")
-      //   .email("Vui lòng nhập tài khoản và mật khẩu hợp lệ !")
       .required("Bắt buộc !"),
     password: Yup.string()
       .min(6, "Phải có 6 ký tự trở lên")
@@ -57,20 +50,20 @@ export const SignUp: FC<Props> = ({ handleChange }) => {
     <>
       <Grid>
         <Paper style={paperStyle}>
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Avatar style={avatarStyle}>
               <AddCircleOutlineOutlinedIcon />
             </Avatar>
           </Grid>
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <h2>Đăng ký</h2>
             <Formik
               enableReinitialize
               initialValues={firstvalue}
               validationSchema={validate}
               onSubmit={(values) => {
-                dispatch({ type: addUser.type, payload: values });
-                alert(JSON.stringify(values, null, 2));
+                addUser(values);
+
                 navigate("/");
               }}
             >

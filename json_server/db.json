@@ -1,7 +1,7 @@
 {
   "user": [
     {
-      "name": "Nguyễn Văn A",
+      "name": "Nguyễn Văn AB",
       "email": "user1",
       "password": "123123",
       "id": 1640673452168,
@@ -15,43 +15,42 @@
       "createdAt": 1640680088363,
       "updateAt": 1640680088363,
       "id": 1640673452171
+    },
+    {
+      "name": "Nguyễn Văn C",
+      "email": "user3",
+      "password": "123123",
+      "createdAt": 1640921492726,
+      "updateAt": 1640921492726,
+      "id": 1640673452172
     }
   ],
   "truck": [
     {
-      "id": "13",
-      "truckPlate": "123456",
-      "cargoType": "2",
-      "driver": "driver 5",
-      "truckType": "truckType 5",
-      "price": "100000",
-      "dimenSion ": "1",
-      "parkingAddress ": "q",
-      "productionYear": "4444",
-      "Status": "Status 14",
-      "description": "h",
-      "dimenSion": "1000",
-      "parkingAddress": "222"
-    },
-    {
-      "truckPlate": "truckPlate 17",
-      "cargoType": "2",
-      "driver": "driver 14",
-      "truckType": "truckType 14",
-      "price": 97,
-      "dimenSion": "dimenSion 14",
-      "parkingAddress": "parkingAddress 14",
-      "productionYear": 75,
-      "Status": "Status 14",
-      "description": "description 14",
-      "id": "14",
-      "dimenSion ": "1",
-      "parkingAddress ": "6"
+      "truckPlate": "30A-50493",
+      "cargoType": [
+        [
+          "",
+          "Nội Thất"
+        ],
+        "Giày"
+      ],
+      "driver": "Nguyễn Văn AB",
+      "truckType": "5 tấn",
+      "price": "1000000000",
+      "dimenSion": "10-2-1.5",
+      "parkingAddress": "No.128 Hoàn Kiếm,HN",
+      "productionYear": "2010",
+      "Status": "Sử dụng",
+      "description": "không có",
+      "id": 1641976822679,
+      "createdAt": 1641976884771,
+      "updateAt": 1641976884771
     }
   ],
   "cargoType": [
     {
-      "cargoType": "Nội Thất6",
+      "cargoType": "Nội Thất",
       "id": "3"
     },
     {
@@ -69,7 +68,7 @@
       "id": "thKGC0f"
     },
     {
-      "cargoType": "Đồ Ăn1",
+      "cargoType": "Đồ Ăn",
       "createdAt": 1640850833581,
       "updateAt": 1640850833581,
       "id": "Ykkq_ZQ"

@@ -1,19 +1,21 @@
 import axiosClient from "./axiosClient";
 
 const cargoTypeApi = {
-    getCargoType: (): Promise<any> => {
+  read:  (): Promise<any> => {
     return axiosClient.get(`cargoType`);
   },
-  addCargoType: (cargoType:any): Promise<any> => {
-    return axiosClient.post(`cargoType`,cargoType);
+  readItem:  (id:string): Promise<any> => {
+    return axiosClient.get(`cargoType/${id}`);
   },
-  deleteCargoType: (id:any): Promise<any> => {
+  create: (user:any): Promise<any> => {
+    return axiosClient.post(`cargoType`,user);
+  },
+  update: (value:any): Promise<any> => {
+    return axiosClient.put(`cargoType/${value.id}`,value);
+  },
+  delete: (id:string): Promise<any> => {
     return axiosClient.delete(`cargoType/${id}`);
   },
-  editCargoType: (cargoType:any): Promise<any> => {
-    return axiosClient.put(`cargoType/${cargoType.id}`,cargoType);
-  },
- 
 };
 
 export default cargoTypeApi;

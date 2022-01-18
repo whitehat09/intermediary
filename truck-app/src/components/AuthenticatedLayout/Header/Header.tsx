@@ -12,14 +12,14 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../app/hooks";
-import { signoutAdmin } from "../../../features/auth/authSlice";
+
+
 
 const pages = ["Xe", "Hàng hoá", "Người dùng"];
 const settings = ["Đăng xuất"];
 export const Header = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -46,7 +46,7 @@ export const Header = () => {
     } else if (name === "Người dùng") {
       navigate("/dashboard/user");
     } else if (name === "Đăng xuất") {
-      dispatch({ type: signoutAdmin.type });
+      localStorage.clear();
       navigate("/");
     }
   };
@@ -115,11 +115,11 @@ export const Header = () => {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  // onClick={handleCloseNavMenu}
+                  
                   onClick={() => linkPage(page)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                  {/* <Link to={page}>{page}</Link> */}
+                
                   {page}
                 </Button>
               ))}
